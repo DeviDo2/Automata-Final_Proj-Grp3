@@ -24,7 +24,7 @@ function clearAlert(id) {
 
 function setResult(id, text, empty) {
   const el = document.getElementById(id);
-  el.textContent = text;
+  el.innerHTML = text.replace(/\n/g, '<br>');
   el.className = empty ? 'result-box empty' : 'result-box';
 }
 
@@ -48,11 +48,11 @@ function computeDivision() {
   const out =
     `SOLUTION\n` +
     `─────────────────────────────\n` +
-    `${dividend} = ${divisor}(${quotient}) + ${remainder}\n\n` +
-    `Dividend  : ${dividend}\n` +
-    `Divisor   : ${divisor}\n` +
-    `Quotient  : ${quotient}\n` +
-    `Remainder : ${remainder}`;
+    `${dividend.toLocaleString()} = ${divisor.toLocaleString()}(${quotient.toLocaleString()}) + ${remainder.toLocaleString()}\n\n` +
+    `Dividend  : ${dividend.toLocaleString()}\n` +
+    `Divisor   : ${divisor.toLocaleString()}\n` +
+    `Quotient  : ${quotient.toLocaleString()}\n` +
+    `Remainder : ${remainder.toLocaleString()}`;
 
   setResult('div-result', out, false);
 }
@@ -78,7 +78,7 @@ function computeEuclidean() {
   while (b !== 0) {
     const q = Math.floor(a / b);
     const r = a % b;
-    steps.push(r === 0 ? `${a} = ${b}(${q})` : `${a} = ${b}(${q}) + ${r}`);
+    steps.push(r === 0 ? `${a.toLocaleString()} = ${b.toLocaleString()}(${q.toLocaleString()})` : `${a.toLocaleString()} = ${b.toLocaleString()}(${q.toLocaleString()}) + ${r.toLocaleString()}`);
     a = b;
     b = r;
   }
@@ -90,9 +90,9 @@ function computeEuclidean() {
     `SOLUTION\n` +
     `─────────────────────────────\n` +
     steps.join('\n') + '\n\n' +
-    `The integers are ${larger} and ${smaller}\n` +
-    `GCD(${larger}, ${smaller}) = ${gcd}\n` +
-    `LCM(${larger}, ${smaller}) = ${lcm}`;
+    `The integers are ${larger.toLocaleString()} and ${smaller.toLocaleString()}\n` +
+    `GCD(${larger.toLocaleString()}, ${smaller.toLocaleString()}) = ${gcd.toLocaleString()}\n` +
+    `LCM(${larger.toLocaleString()}, ${smaller.toLocaleString()}) = ${lcm.toLocaleString()}`;
 
   setResult('euc-result', out, false);
 }
@@ -150,8 +150,8 @@ function computePalindrome() {
 
   const verdict = document.getElementById('pal-verdict');
   verdict.innerHTML = isPalin
-    ? '<span class="badge yes">Yes</span>'
-    : '<span class="badge no">No</span>';
+    ? '<span class="g3-badge yes">Yes</span>'
+    : '<span class="g3-badge no">No</span>';
 
   document.getElementById('pal-result-area').style.display = 'block';
 }
