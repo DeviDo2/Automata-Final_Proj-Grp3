@@ -28,6 +28,10 @@ function setResult(id, text, empty) {
   el.className = empty ? 'result-box empty' : 'result-box';
 }
 
+function formatNumber(num) {
+  return num.toLocaleString();
+}
+
 // ── DIVISION ALGORITHM ──────────────────
 function computeDivision() {
   clearAlert('div-alert');
@@ -48,11 +52,11 @@ function computeDivision() {
   const out =
     `SOLUTION\n` +
     `─────────────────────────────\n` +
-    `${dividend.toLocaleString()} = ${divisor.toLocaleString()}(${quotient.toLocaleString()}) + ${remainder.toLocaleString()}\n\n` +
-    `Dividend  : ${dividend.toLocaleString()}\n` +
-    `Divisor   : ${divisor.toLocaleString()}\n` +
-    `Quotient  : ${quotient.toLocaleString()}\n` +
-    `Remainder : ${remainder.toLocaleString()}`;
+    `${formatNumber(dividend)} = ${formatNumber(divisor)}(${formatNumber(quotient)}) + ${formatNumber(remainder)}\n\n` +
+    `Dividend  : ${formatNumber(dividend)}\n` +
+    `Divisor   : ${formatNumber(divisor)}\n` +
+    `Quotient  : ${formatNumber(quotient)}\n` +
+    `Remainder : ${formatNumber(remainder)}`;
 
   setResult('div-result', out, false);
 }
@@ -78,7 +82,7 @@ function computeEuclidean() {
   while (b !== 0) {
     const q = Math.floor(a / b);
     const r = a % b;
-    steps.push(r === 0 ? `${a.toLocaleString()} = ${b.toLocaleString()}(${q.toLocaleString()})` : `${a.toLocaleString()} = ${b.toLocaleString()}(${q.toLocaleString()}) + ${r.toLocaleString()}`);
+    steps.push(r === 0 ? `${formatNumber(a)} = ${formatNumber(b)}(${formatNumber(q)})` : `${formatNumber(a)} = ${formatNumber(b)}(${formatNumber(q)}) + ${formatNumber(r)}`);
     a = b;
     b = r;
   }
@@ -90,9 +94,9 @@ function computeEuclidean() {
     `SOLUTION\n` +
     `─────────────────────────────\n` +
     steps.join('\n') + '\n\n' +
-    `The integers are ${larger.toLocaleString()} and ${smaller.toLocaleString()}\n` +
-    `GCD(${larger.toLocaleString()}, ${smaller.toLocaleString()}) = ${gcd.toLocaleString()}\n` +
-    `LCM(${larger.toLocaleString()}, ${smaller.toLocaleString()}) = ${lcm.toLocaleString()}`;
+    `The integers are ${formatNumber(larger)} and ${formatNumber(smaller)}\n` +
+    `GCD(${formatNumber(larger)}, ${formatNumber(smaller)}) = ${formatNumber(gcd)}\n` +
+    `LCM(${formatNumber(larger)}, ${formatNumber(smaller)}) = ${formatNumber(lcm)}`;
 
   setResult('euc-result', out, false);
 }
