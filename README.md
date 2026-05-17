@@ -1,8 +1,8 @@
-# Math Tools: Automata Final Project - Group 3
+# Automata Final Project - Group 3
 
 ## 📋 Project Description
 
-**Math Tools** is a comprehensive web-based collection of discrete mathematics case studies developed as the final project for the Automata subject. This project showcases fundamental algorithms and mathematical concepts through an interactive, user-friendly interface. Each tool demonstrates key principles in automata theory and discrete mathematics with step-by-step computations and detailed explanations.
+A comprehensive web-based collection of case studies developed as the final project for the Automata subject. This project showcases fundamental algorithms and mathematical concepts through an interactive, user-friendly interface. Each tool demonstrates key principles in automata theory and discrete mathematics with step-by-step computations and detailed explanations.
 
 ---
 
@@ -20,7 +20,7 @@
 ## ⭐ Core Features
 
 1. **Division Algorithm**
-   - Computes quotient and remainder for any two positive integers
+   - Computes the quotient and remainder for any two positive integers
    - Displays the mathematical relationship: a = b·q + r (where 0 ≤ r < b)
    - Automatically handles input ordering and validates user inputs
 
@@ -84,9 +84,3 @@ Group3/
 2. Select a tool from the home screen
 3. Enter your inputs and click "Compute"
 4. View detailed results with calculations and steps
-
----
-
-## 📝 Notes
-
-This project demonstrates core concepts in discrete mathematics and automata theory through practical, interactive implementations. Each tool is designed to provide both computational results and educational value through clear explanations and step-by-step processes.
