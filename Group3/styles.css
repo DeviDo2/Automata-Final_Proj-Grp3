@@ -262,6 +262,18 @@ textarea { resize: vertical; min-height: 60px; font-family: var(--mono); }
 .g3-alert.error   { background: var(--red-lt);   color: var(--red);   border: 1px solid #e8b4b4; display: block; }
 .g3-alert.success { background: var(--green-lt); color: var(--green); border: 1px solid #aacbb3; display: block; }
 
+/* ── INPUT INVALID FLASH ── */
+.input-invalid {
+  border-color: #d64545 !important;
+  animation: flash-red 700ms ease-in-out;
+  box-shadow: 0 0 0 0 rgba(214,69,69,0);
+}
+@keyframes flash-red {
+  0%   { box-shadow: 0 0 0 0 rgba(214,69,69,0); }
+  25%  { box-shadow: 0 0 0 8px rgba(214,69,69,0.18); }
+  100% { box-shadow: 0 0 0 0 rgba(214,69,69,0); }
+}
+
 /* ── TABS (for Recursive Sequences) ── */
 .g3-tabs {
   display: flex;

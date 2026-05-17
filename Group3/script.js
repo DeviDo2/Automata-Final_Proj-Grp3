@@ -32,13 +32,28 @@ function formatNumber(num) {
   return num.toLocaleString();
 }
 
+// add a small flash on invalid inputs so users know which field is wrong
+function flashInput(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove('input-invalid');
+  void el.offsetWidth; // reflow to restart animation
+  el.classList.add('input-invalid');
+  setTimeout(() => el.classList.remove('input-invalid'), 700);
+}
+
 // ── DIVISION ALGORITHM ──────────────────
 function computeDivision() {
   clearAlert('div-alert');
-  const a = parseInt(document.getElementById('div-a').value);
-  const b = parseInt(document.getElementById('div-b').value);
+  const aEl = document.getElementById('div-a');
+  const bEl = document.getElementById('div-b');
+  const a = parseInt(aEl.value);
+  const b = parseInt(bEl.value);
 
-  if (isNaN(a) || isNaN(b) || a <= 0 || b <= 0) {
+  let invalid = false;
+  if (isNaN(a) || a <= 0) { flashInput('div-a'); invalid = true; }
+  if (isNaN(b) || b <= 0) { flashInput('div-b'); invalid = true; }
+  if (invalid) {
     showAlert('div-alert', 'Please enter two positive integers.', 'error');
     setResult('div-result', 'Enter two positive integers and click Compute.', true);
     return;
@@ -64,10 +79,15 @@ function computeDivision() {
 // ── EUCLIDEAN ALGORITHM ─────────────────
 function computeEuclidean() {
   clearAlert('euc-alert');
-  const n1 = parseInt(document.getElementById('euc-a').value);
-  const n2 = parseInt(document.getElementById('euc-b').value);
+  const n1El = document.getElementById('euc-a');
+  const n2El = document.getElementById('euc-b');
+  const n1 = parseInt(n1El.value);
+  const n2 = parseInt(n2El.value);
 
-  if (isNaN(n1) || isNaN(n2) || n1 <= 0 || n2 <= 0) {
+  let invalid = false;
+  if (isNaN(n1) || n1 <= 0) { flashInput('euc-a'); invalid = true; }
+  if (isNaN(n2) || n2 <= 0) { flashInput('euc-b'); invalid = true; }
+  if (invalid) {
     showAlert('euc-alert', 'Please enter two positive integers.', 'error');
     setResult('euc-result', 'Enter two positive integers and click Compute.', true);
     return;
@@ -108,6 +128,7 @@ function computeCollatz() {
   const n = parseInt(raw);
 
   if (!raw || isNaN(n) || n <= 0 || n % 2 === 0) {
+    flashInput('col-n');
     showAlert('col-alert', 'Please enter a positive odd integer.', 'error');
     setResult('col-result', 'Enter a positive odd integer and click Compute.', true);
     return;
@@ -138,6 +159,7 @@ function clearCollatz() {
 // ── PALINDROME CHECKER ──────────────────
 function computePalindrome() {
   const raw = document.getElementById('pal-input').value;
+  if (!raw || raw.trim() === '') { flashInput('pal-input'); return; }
   const len = raw.length;
 
   const stripped = raw.replace(/ /g, '').toUpperCase();
@@ -188,6 +210,7 @@ function computeRecursive() {
   const min = minMap[currentTab];
 
   if (isNaN(n) || n < min) {
+    flashInput('rec-n');
     showAlert('rec-alert', `Please enter an integer greater than ${min - 1}.`, 'error');
     setResult('rec-result', 'Choose a sequence type and enter the number of terms.', true);
     return;
