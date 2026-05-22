@@ -32,6 +32,32 @@ function formatNumber(num) {
   return num.toLocaleString();
 }
 
+function wrapTerms(terms, perLine) {
+  if (!Array.isArray(terms) || perLine <= 0) return '';
+  const text = terms.join(', ');
+  const lines = [];
+  let line = '';
+  let count = 0;
+
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    const isSpace = ch === ' ';
+
+    if (!isSpace && count >= perLine) {
+      if (line) lines.push(line);
+      line = '';
+      count = 0;
+    }
+
+    if (isSpace && line === '') continue;
+    line += ch;
+    if (!isSpace) count++;
+  }
+
+  if (line) lines.push(line);
+  return lines.join('\n');
+}
+
 // add a small flash on invalid inputs so users know which field is wrong
 function flashInput(id) {
   const el = document.getElementById(id);
@@ -231,7 +257,7 @@ function computeRecursive() {
 
   const out =
     `The ${nameMap[currentTab]} numbers (${n} terms):\n\n` +
-    seq.join(', ');
+    wrapTerms(seq, 65);
 
   setResult('rec-result', out, false);
 }
